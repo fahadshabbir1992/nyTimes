@@ -23,7 +23,7 @@ class MainActivityTest {
     @Test
     fun getNewsRecyclerViewAdapter() {
     }
-
+ 
     @Test
     fun setNewsRecyclerViewAdapter() {
     }

@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
-        android:textColor="#76DF79"
+        android:textColor="@color/colorPrimary"
         android:layout_height="wrap_content"/>
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleText"
         android:layout_marginLeft="50dp"
-        android:id="@+id/title"
+        android:id="@+id/title1"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:text="Title"
@@ -31,25 +31,74 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="Article Title"
-
+        android:text="Author"
+        android:layout_below="@+id/title1"
         android:textSize="17sp"
         android:id="@+id/authorText"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="50dp"
-        android:textColor="#76DF79"
+        android:textColor="@color/colorPrimary"
         android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleText"
+        android:layout_below="@+id/authorText"
         android:layout_marginLeft="50dp"
-        android:id="@+id/title"
+        android:id="@+id/author"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:text="Title"
+        android:text="Author"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Released Date"
+        android:layout_below="@+id/author"
+        android:textSize="17sp"
+        android:id="@+id/dateText"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateText"
+        android:layout_marginLeft="50dp"
+        android:id="@+id/date"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:text="Release date"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date"
+        android:layout_marginLeft="50dp"
+        android:id="@+id/article"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:text="Details"
+        />
+
+    <Button
+        android:id="@+id/read_btn"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:background="@drawable/button_background"
+       android:layout_marginTop="30dp"
+        android:layout_below="@id/article"
+      android:layout_marginLeft="50dp"
+        android:textColor="@color/white"
+        android:text="View Source"
+        android:textStyle="bold"
+        android:textSize="12sp"
+
+        />
 </RelativeLayout>

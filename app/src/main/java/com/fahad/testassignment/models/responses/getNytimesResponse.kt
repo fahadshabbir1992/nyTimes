@@ -7,11 +7,11 @@ data class GetNytimesResponse(
     val status: String,
     val copyright: String,
     val num_results: Int,
-    val results: List<results>
+    val results: List<Results>
 
 )
 
-data class results(
+data class Results(
     val url: String,
     val title: String,
     val abstract: String,

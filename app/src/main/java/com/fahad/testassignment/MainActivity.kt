@@ -6,39 +6,58 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fahad.testassignment.adapters.NewsRecyclerViewAdapter
+import com.fahad.testassignment.databinding.ActivityMainBinding
 import com.fahad.testassignment.models.responses.GetNytimesResponse
-import com.fahad.testassignment.models.responses.results
+import com.fahad.testassignment.models.responses.Results
 import com.fahad.testassignment.network.ApiUtils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
-import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+public class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        articles_recycler_view.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+
+
+        val activityMainBinding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+
+
+
+
+
+
+
+        // bind RecyclerView
+        val recyclerView: RecyclerView = activityMainBinding.articlesRecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        recyclerView.setHasFixedSize(true)
+
 
         getArticles()
     }
 
     companion object {
 
-        var newsData: results? = null
+        var newsData: Results? = null
 
     }
 
     var NewsRecyclerViewAdapter: NewsRecyclerViewAdapter? = null
-    var api_key="Vyx9V1dgJQjYcJQ7Hx3o9DkV18plTOez"
+
+  //  var api_key=getString(R.string.api_key)
+
     fun getArticles() {
-        ApiUtils.getAPIService().getArticles()
+
+        ApiUtils.getAPIService().getArticles(getString(R.string.key))
             .enqueue(object : retrofit2.Callback<GetNytimesResponse> {
                 override fun onFailure(call: Call<GetNytimesResponse>, t: Throwable) {
                     //  progress.visibility = View.GONE
@@ -59,16 +78,11 @@ class MainActivity : AppCompatActivity() {
                                     response.body()!!.results!!,
                                     returnNews = {
 
-                                        //   Log.e("log data",NewsData!!.option_id.toString())
-                                        //     getDoctorsList( specialityData!!.option_id, "", "")
-                                        //  findDoctors(specialityData!!.option_id, "", "")
 
 
                                         var  mPrefs:SharedPreferences = getPreferences(MODE_PRIVATE)
 
 
-
-//set variables of 'myObject', etc.
 
                                        var  prefsEditor: SharedPreferences.Editor = mPrefs.edit()
 
@@ -80,11 +94,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-                                    //    SharedPrefs.setArticleData(this@MainActivity, newsData)
                                     val intent = Intent(this@MainActivity, ArticleDetailsActivity::class.java)
-//Log.e("Data send", newsData.toString())
-                      //  var r:results? = newsData.toString()
+
 
                                   intent.putExtra("data", json)
                                     startActivity(intent)
@@ -94,19 +105,6 @@ class MainActivity : AppCompatActivity() {
                             articles_recycler_view.adapter = NewsRecyclerViewAdapter
 
 
-
-//                         specialityList.clear()
-//                         specialityMap.clear()
-//
-//                      //   specialityList.add("Speciality")
-//                         for (facility in response.body()!!.data) {
-//                             specialityList.add(facility.title)
-//                             specialityMap.put(facility.title, facility.option_id)
-//                         }
-//
-//                         specialityAdapter = ArrayAdapter(this@FindDoctorActivity, android.R.layout.simple_spinner_item, specialityList)
-//                         specialityAdapter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//                         speciality_spinner.adapter = specialityAdapter
 
 
                         } else {

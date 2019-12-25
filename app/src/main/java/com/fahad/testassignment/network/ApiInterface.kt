@@ -7,8 +7,12 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
-    @GET("all-sections/7.json?api-key=Vyx9V1dgJQjYcJQ7Hx3o9DkV18plTOez")
+
+
+
+    @GET("all-sections/7.json")
     fun getArticles(
+       @Query("api-key") api_key:String
     ): Call<GetNytimesResponse>
 
 

@@ -1,47 +1,49 @@
 package com.fahad.testassignment
 
+
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import com.fahad.testassignment.models.responses.results
-import com.fahad.testassignment.utils.SharedPrefs
-import com.google.gson.Gson
-import org.json.JSONObject
+import androidx.appcompat.app.AppCompatActivity
+import com.fahad.testassignment.models.responses.Results
 
-class ArticleDetailsActivity : AppCompatActivity() {
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_article_details.*
+import java.lang.Exception
+
+
+public class ArticleDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_details)
-
-  //    var  articleData: results? = SharedPrefs.getArticleData(this@ArticleDetailsActivity)
-
-        var  mPrefs: SharedPreferences = getPreferences(MODE_PRIVATE)
-
         val gson = Gson()
-        //val json = mPrefs.getString("NewsArticle", "")
-        var json =intent.getStringExtra("data")
-
-
-
-
-       val obj:results =
-           gson.fromJson<results>(json, results::class.java)
+        var json = intent.getStringExtra("data")
+try{
+        val obj: Results =
+            gson.fromJson<Results>(json, Results::class.java)
         Log.e("Data to show", obj.toString())
 
-        obj.title
-        obj.abstract
-        obj.byline
-        obj.published_date
-        obj.url
+        title1.text = obj.title
+        article.text = obj.abstract
+        author.text = obj.byline
+        date.text = obj.published_date
+        read_btn.setOnClickListener {
+            val browserIntent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(obj.url))
+            startActivity(browserIntent)
+        }
 
-         obj.media[0].`media-metadata`
-        for (i in  obj.media[0].`media-metadata`){
 
-            Log.e("hello",i.url.toString())
+        obj.media[0].`media-metadata`
+        for (i in obj.media[0].`media-metadata`) {
+
+            Log.e("hello", i.url.toString())
 
         }
+    }catch(e:Exception) {
+}
+
     }
 }

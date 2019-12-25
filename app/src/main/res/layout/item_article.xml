@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="article"
+            type="com.fahad.testassignment.models.responses.Results"/>
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:id="@+id/news"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:background="@color/grey">
 
 <!--    <ImageView-->
@@ -31,7 +42,9 @@ app:layout_constraintLeft_toLeftOf="parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
         android:layout_marginTop="16dp"
-        android:text="Aupporters of the democratic candidate Jon Ossoffafter his..."
+        android:text="@{article.title}"
+
+
         android:textColor="@color/black"
         android:textSize="16sp"
         android:layout_marginEnd="60dp"
@@ -90,3 +103,4 @@ app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/date"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

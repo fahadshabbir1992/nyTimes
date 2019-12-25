@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'jacoco'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -16,10 +18,26 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            resValue "string", "api_key", "Vyx9V1dgJQjYcJQ7Hx3o9DkV18plTOez"
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "api_key", "Vyx9V1dgJQjYcJQ7Hx3o9DkV18plTOez"
         }
+    }
+    dataBinding{
+        enabled = true
+    }
+
+    testOptions {
+        animationsDisabled = true
+    }
+
+    jacoco {
+        version = '0.7.9'
     }
 }
 
@@ -48,4 +66,14 @@ dependencies {
 
     // Circular Image View
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation "org.mockito:mockito-all:2.0.2-beta"
+
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
+
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
 }
